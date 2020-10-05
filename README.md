@@ -1,75 +1,41 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Recruitment task
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Background
+The project consists of three modules:
+* Users,
+* Companies,
+* Payments.
 
-## Description
+The "users" and "companies" module are simple CRUDs, one with REST API, the second one with GraphQL API.  
+The "payments" module tends to use CQRS. We have two commands exposed from the module, TopUpCompanyCommand, 
+and ChargeUserCommand.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A "user" represents just a user of our system. Every user belongs to a company – that also has a representation in our
+system. One company can have multiple users assigned.
 
-## Installation
+Users have funds in our system. We can change their balance through those two commands in the "payments" module.
 
-```bash
-$ npm install
-```
+The DB used in the project is sqlite3 for simplicity, set up along with TypeORM. Also, please do not care about
+authorization and security in this project.
 
-## Running the app
+If you want to reorganize the code – feel free. The project is only a suggestion.
 
-```bash
-# development
-$ npm run start
+## What is the must-have of the recruitment task?
+1. During the compilation of the project, the compiler complains about a few things. We would like you to fix the errors.
+Please keep the "strict" type checking option turned on.
+2. The modules in the projects are only scaffoldings. "Users" and "companies" modules do not work. Please find missing
+parts and implement them to make those modules fully functional.
 
-# watch mode
-$ npm run start:dev
+## What is nice to have in the task?
+1. In the "payments" module, we have two commands without handlers. We would like you to make the "payments" module
+working, with REST API exposed through the PaymentsController. The user's balance should never get below zero. We
+suggest using the "@nestjs/cqrs" package in the app.
+2. We got a new business requirement that (you do not need to take both): 
+   1. Some companies may have debt.
+   2. Accountants need a simple page (just plain HTML "company name – amount") with a report in the app – an average of
+   a balance of every company.  
+ 
+   How would you implement the change? Please describe steps or put the requirement into the code.
 
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
+## How to send us the solution?
+Please do not make a public PR to this repo. We prefer to be invited to a private fork of the repository.
